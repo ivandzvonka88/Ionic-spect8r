@@ -1,0 +1,7 @@
+{
+  "name": "spect8r",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

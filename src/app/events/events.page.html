@@ -1,0 +1,13 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title text-center>e v e n t s</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list no-lines>
+    <ion-card background="clear" *ngFor="let event of events">
+      <ion-img [src]="event.myImages[0].imageUrl" [routerLink]="['/','tabs','events',event.eventId]"></ion-img>
+    </ion-card>
+  </ion-list>
+</ion-content>

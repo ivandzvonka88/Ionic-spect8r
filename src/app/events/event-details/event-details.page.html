@@ -1,0 +1,88 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/events"></ion-back-button>
+    </ion-buttons>
+    <ion-title>d e t a i l s</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <div text-left>
+          {{event.eventName}}
+        </div>
+      </ion-col>
+      <ion-col>
+        <div text-right>
+          {{event.eventDate}}
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <div padding>
+    <ion-segment [(ngModel)]="segment" (ionChange)="segmentChanged($event)">
+      <ion-segment-button value="images">Images</ion-segment-button>
+      <ion-segment-button value="setlist">Setlist</ion-segment-button>
+      <ion-segment-button activated value="settings">Settings</ion-segment-button>
+    </ion-segment>
+  </div>
+
+  <ion-list *ngIf="segment == 'images'" lines="none">
+    <ion-item-divider>
+      <ion-label position="stacked">Images</ion-label>
+    </ion-item-divider>
+    <ion-card *ngFor="let image of event.myImages">
+      <img src="{{image.imageUrl}}" alt="">
+    </ion-card>
+  </ion-list>
+
+  <ion-list *ngIf="segment == 'setlist'" lines="none">
+    <ion-item-divider>
+      <ion-label position="stacked">Setlist</ion-label>
+    </ion-item-divider>
+    <ion-item>
+      <ion-label>{{setlistUrl}}</ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-list *ngIf="segment == 'settings'" lines="none">
+    <!-- headliner -->
+    <ion-item-divider>
+      <ion-label position="stacked">{{headlinerLabel}}</ion-label>
+    </ion-item-divider>
+    <ion-item *ngFor="let artist of event.headliningArtists">
+      <ion-label>{{artist.artistName}}</ion-label>
+    </ion-item>
+    <!-- support -->
+    <ion-item-divider *ngIf="event.supportingArtists.length > 0">
+      <ion-label position="stacked">{{supportingLabel}}</ion-label>
+    </ion-item-divider>
+    <ion-item *ngFor="let artist of event.supportingArtists">
+      <ion-label>{{artist.artistName}}</ion-label>
+    </ion-item>
+    <!-- venue -->
+    <ion-item-divider>
+      <ion-label position="stacked">Venue</ion-label>
+    </ion-item-divider>
+    <ion-item>
+      <ion-label>{{venueName}}</ion-label>
+    </ion-item>
+    <!-- date -->
+    <ion-item-divider>
+      <ion-label position="stacked">Date</ion-label>
+    </ion-item-divider>
+    <ion-item>
+      <ion-label>{{date}}</ion-label>
+    </ion-item>
+    <!-- buttons -->
+    <ion-item>
+      <ion-button>Save</ion-button>
+      <ion-button color="light">Cancel</ion-button>
+      <ion-button color="danger">Remove</ion-button>
+    </ion-item>
+  </ion-list>
+</ion-content>
